@@ -1,18 +1,18 @@
 package com.lublin.groceriesjavaspringbe.service;
 
-import com.lublin.groceriesjavaspringbe.model.Task;
+import com.lublin.groceriesjavaspringbe.model.User;
 
 import java.util.List;
 
 public interface IUserService {
 
-    Task findById(String id);
+    User findById(String id);
 
-    List<Task> findAll();
+    List<User> findAll();
 
-    Task save(Task task);
+    User save(User user);
 
-    void update(String id, Task task);
+    void update(String id, User user);
 
     void delete(String id);
 
