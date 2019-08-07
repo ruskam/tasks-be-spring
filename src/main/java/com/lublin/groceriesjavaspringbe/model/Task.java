@@ -23,6 +23,7 @@ public class Task {
         this.title = title;
         this.isDone = isDone;
         this.date = date;
+        this.userId = userId;
     }
 
     public String getTaskId() {

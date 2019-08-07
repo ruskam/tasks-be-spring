@@ -8,9 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -42,7 +40,7 @@ public class TaskController {
                     HttpStatus.NOT_FOUND, "finById API not found", e);
         }
     }
-
+/*
     @PostMapping("/task")
     public ResponseEntity<?> save(@RequestBody Task task) {
         try {
@@ -56,7 +54,7 @@ public class TaskController {
                     HttpStatus.NOT_FOUND, "create API not found", e);
         }
     }
-
+*/
     @PutMapping("/task/{id}")
     public ResponseEntity<Void> update(@PathVariable("id") String taskId, @RequestBody Task task) {
         try {

@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 import java.util.Objects;
 
+// to be reprogrammed to introduce password decoding
 @Document(collection = "user_spring")
 public class User {
 
@@ -16,12 +17,14 @@ public class User {
     private String name;
     private String email;
     private String password;
+    private Date date;
 
-    public User(String userId, String name, String email, String password) {
+    public User(String userId, String name, String email, String password, Date date) {
         this.userId = userId;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.date = date;
     }
 
     public String getId() {
@@ -62,6 +65,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     @Override
