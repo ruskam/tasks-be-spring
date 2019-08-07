@@ -1,7 +1,7 @@
 package com.lublin.groceriesjavaspringbe.service;
 
-import com.lublin.groceriesjavaspringbe.dao.ITaskDao;
-import com.lublin.groceriesjavaspringbe.model.Task;
+import com.lublin.groceriesjavaspringbe.dao.IUserDao;
+import com.lublin.groceriesjavaspringbe.model.User;
 import com.lublin.groceriesjavaspringbe.utility.Util;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,45 +10,45 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service("taskService")
+@Service("userService")
 @Transactional(readOnly = true)
-public class TaskService implements ITaskService{
+public class UserService implements IUserService{
 
     @Autowired
-    ITaskDao taskDao;
+    IUserDao userDao;
 
     @Override
-    public Task findById(String id) {
-        return taskDao.findById(id);
+    public User findById(String id) {
+        return userDao.findById(id);
     }
 
     @Override
-    public List<Task> findAll() {
-        return taskDao.findAll();
+    public List<User> findAll() {
+        return userDao.findAll();
     }
 
     @Override
-    public Task save(Task task) {
+    public User save(User user) {
         ObjectId genId = ObjectId.get();
-        task.setTaskId(genId.toString());
-        task.setDate(Util.getCorrectTime());
-        return taskDao.save(task);
+        user.setUserId(genId.toString());
+        user.setDate(Util.getCorrectTime());
+        return userDao.save(user);
     }
 
     @Override
-    public void update(String id, Task task) {
-        task.setDate(Util.getCorrectTime());
-        taskDao.update(id, task);
+    public void update(String id, User user) {
+        user.setDate(Util.getCorrectTime());
+        userDao.update(id, user);
     }
 
     @Override
     public void delete(String id) {
-        taskDao.delete(id);
+        userDao.delete(id);
     }
 
     @Override
     public void deleteAll() {
-        taskDao.deleteAll();
+        userDao.deleteAll();
     }
 
 }

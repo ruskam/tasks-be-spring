@@ -2,7 +2,7 @@ package com.lublin.groceriesjavaspringbe.controller;
 
 import com.lublin.groceriesjavaspringbe.MyResourceNotFoundException;
 import com.lublin.groceriesjavaspringbe.model.Task;
-import com.lublin.groceriesjavaspringbe.service.TaskService;
+import com.lublin.groceriesjavaspringbe.service.ITaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import java.util.List;
 public class TaskController {
 
     @Autowired
-    private TaskService taskService;
+    private ITaskService taskService;
 
     @GetMapping("/task/{id}")
     public ResponseEntity<?> getTaskById(@PathVariable("id") String id) {

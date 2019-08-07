@@ -2,7 +2,8 @@ package com.lublin.groceriesjavaspringbe.controller;
 
 import com.lublin.groceriesjavaspringbe.MyResourceNotFoundException;
 import com.lublin.groceriesjavaspringbe.model.Task;
-import com.lublin.groceriesjavaspringbe.service.TaskService;
+import com.lublin.groceriesjavaspringbe.model.User;
+import com.lublin.groceriesjavaspringbe.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,16 +14,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class TaskController {
+public class UserController {
 
     @Autowired
-    private TaskService taskService;
+    private IUserService userService;
 
-    @GetMapping("/task/{id}")
-    public ResponseEntity<?> getTaskById(@PathVariable("id") String id) {
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable("id") String id) {
         try {
-            Task task = taskService.findById(id);
-            return ResponseEntity.ok().body(task);
+            User user = userService.findById(id);
+            return ResponseEntity.ok().body(user);
         } catch (MyResourceNotFoundException e) {
             throw new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "finById API not found", e);
