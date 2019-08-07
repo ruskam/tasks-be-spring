@@ -15,10 +15,6 @@ import java.util.List;
 @Qualifier("taskDao")
 public class TaskDao implements ITaskDao {
 
-    /**
-     * check with spring-ng-project API
-     */
-
     @Autowired
     MongoTemplate mongoTemplate;
 

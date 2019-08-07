@@ -16,7 +16,9 @@ public class Task {
     private boolean isDone;
     private Date date;
 
-    public Task(String taskId, String title, boolean isDone, Date date) {
+    private String userId;
+
+    public Task(String taskId, String title, boolean isDone, Date date, String userId) {
         this.taskId = taskId;
         this.title = title;
         this.isDone = isDone;
@@ -55,13 +57,23 @@ public class Task {
         this.date = date;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     @Override
     public String toString() {
         return "Task{" +
-                "taskId='" + taskId + '\'' +
+                "id='" + id + '\'' +
+                ", taskId='" + taskId + '\'' +
                 ", title='" + title + '\'' +
                 ", isDone=" + isDone +
                 ", date=" + date +
+                ", userId='" + userId + '\'' +
                 '}';
     }
 }
