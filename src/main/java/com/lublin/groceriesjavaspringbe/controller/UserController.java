@@ -1,7 +1,6 @@
 package com.lublin.groceriesjavaspringbe.controller;
 
 import com.lublin.groceriesjavaspringbe.MyResourceNotFoundException;
-import com.lublin.groceriesjavaspringbe.model.Task;
 import com.lublin.groceriesjavaspringbe.model.User;
 import com.lublin.groceriesjavaspringbe.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -19,7 +20,7 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<?> getUserById(@PathVariable("id") String id) {
         try {
             User user = userService.findById(id);
@@ -31,35 +32,35 @@ public class UserController {
 
     }
 
-    @GetMapping("/task")
-    public ResponseEntity<List<Task>> list() {
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> list() {
         try {
-            List<Task> list = taskService.findAll();
+            List<User> list = userService.findAll();
             return ResponseEntity.ok().body(list);
         } catch (MyResourceNotFoundException e) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "finById API not found", e);
         }
     }
-/*
-    @PostMapping("/task")
-    public ResponseEntity<?> save(@RequestBody Task task) {
+
+    @PostMapping("/users")
+    public ResponseEntity<?> save(@RequestBody User user) {
         try {
-            Task result = taskService.save(new Task(task.getTaskId(), task.getTitle(), task.getIsDone(), task.getDate()));
+            User result = userService.save(new User(user.getUserId(), user.getName(), user.getEmail(), user.getPassword(), user.getDate()));
             URI location = ServletUriComponentsBuilder
                     .fromCurrentRequest().path("/{id}")
-                    .buildAndExpand(result.getTaskId()).toUri();
+                    .buildAndExpand(result.getUserId()).toUri();
             return ResponseEntity.created(location).build();
         } catch (MyResourceNotFoundException e) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "create API not found", e);
         }
     }
-*/
-    @PutMapping("/task/{id}")
-    public ResponseEntity<Void> update(@PathVariable("id") String taskId, @RequestBody Task task) {
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity<Void> update(@PathVariable("id") String userId, @RequestBody User user) {
         try {
-            taskService.update(taskId, task);
+            userService.update(userId, user);
             return ResponseEntity.noContent().build();
         } catch (MyResourceNotFoundException e) {
             throw new ResponseStatusException(
@@ -67,10 +68,10 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/task/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") String taskId) {
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") String userId) {
         try {
-            taskService.delete(taskId);
+            userService.delete(userId);
             return ResponseEntity.noContent().build();
         } catch (MyResourceNotFoundException e) {
             throw new ResponseStatusException(
@@ -78,10 +79,10 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/task")
+    @DeleteMapping("/users")
     public ResponseEntity deleteAll() {
         try {
-            taskService.deleteAll();
+            userService.deleteAll();
             return ResponseEntity.noContent().build();
         } catch (MyResourceNotFoundException e) {
             throw new ResponseStatusException(

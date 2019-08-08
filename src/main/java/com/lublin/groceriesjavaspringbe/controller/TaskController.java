@@ -18,7 +18,7 @@ public class TaskController {
     @Autowired
     private ITaskService taskService;
 
-    @GetMapping("/task/{id}")
+    @GetMapping("/tasks/{id}")
     public ResponseEntity<?> getTaskById(@PathVariable("id") String id) {
         try {
             Task task = taskService.findById(id);
@@ -30,7 +30,7 @@ public class TaskController {
 
     }
 
-    @GetMapping("/task")
+    @GetMapping("/tasks")
     public ResponseEntity<List<Task>> list() {
         try {
             List<Task> list = taskService.findAll();
@@ -55,7 +55,7 @@ public class TaskController {
         }
     }
 */
-    @PutMapping("/task/{id}")
+    @PutMapping("/tasks/{id}")
     public ResponseEntity<Void> update(@PathVariable("id") String taskId, @RequestBody Task task) {
         try {
             taskService.update(taskId, task);
@@ -66,7 +66,7 @@ public class TaskController {
         }
     }
 
-    @DeleteMapping("/task/{id}")
+    @DeleteMapping("/tasks/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") String taskId) {
         try {
             taskService.delete(taskId);
@@ -77,7 +77,7 @@ public class TaskController {
         }
     }
 
-    @DeleteMapping("/task")
+    @DeleteMapping("/tasks")
     public ResponseEntity deleteAll() {
         try {
             taskService.deleteAll();
