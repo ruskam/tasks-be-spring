@@ -50,9 +50,9 @@ public class UserDao implements IUserDao {
         updateQuery.addCriteria(Criteria.where("userId").is(id));
 
         Update newUpdate = new Update();
-        newUpdate.set("title", user.getName());
-        newUpdate.set("isDone", user.getEmail());
-        newUpdate.set("date", user.getDate());
+        newUpdate.set("name", user.getName());
+        newUpdate.set("email", user.getEmail());
+        newUpdate.set("password", user.getDate());
 
         mongoTemplate.updateMulti(updateQuery, newUpdate, User.class);
     }
