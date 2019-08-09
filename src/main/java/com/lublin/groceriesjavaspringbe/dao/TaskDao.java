@@ -40,6 +40,11 @@ public class TaskDao implements ITaskDao {
     }
 
     @Override
+    public List<Task> findAllByUserId(String userId) {
+        return null;
+    }
+
+    @Override
     public Task save(Task task) {
         return mongoTemplate.save(task);
     }

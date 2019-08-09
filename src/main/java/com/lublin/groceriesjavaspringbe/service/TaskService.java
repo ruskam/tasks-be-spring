@@ -28,6 +28,11 @@ public class TaskService implements ITaskService{
     }
 
     @Override
+    public List<Task> findAllByUserId(String userId) {
+        return taskDao.findAllByUserId(userId);
+    }
+
+    @Override
     public Task save(Task task) {
         ObjectId genId = ObjectId.get();
         task.setTaskId(genId.toString());

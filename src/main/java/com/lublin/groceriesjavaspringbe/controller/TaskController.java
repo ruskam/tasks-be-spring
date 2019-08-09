@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -31,20 +33,33 @@ public class TaskController {
     }
 
     @GetMapping("/tasks")
-    public ResponseEntity<List<Task>> list() {
+    public ResponseEntity<List<Task>> listAllTasks() {
         try {
             List<Task> list = taskService.findAll();
             return ResponseEntity.ok().body(list);
         } catch (MyResourceNotFoundException e) {
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "finById API not found", e);
+                    HttpStatus.NOT_FOUND, "findAll API not found", e);
         }
     }
-/*
-    @PostMapping("/task")
-    public ResponseEntity<?> save(@RequestBody Task task) {
+
+    @GetMapping("/users/{userId}/tasks")
+    public ResponseEntity<List<Task>> listAllTasksByUserId(@PathVariable String userId) {
         try {
-            Task result = taskService.save(new Task(task.getTaskId(), task.getTitle(), task.getIsDone(), task.getDate()));
+            List<Task> list = taskService.findAllByUserId(userId);
+            return ResponseEntity.ok().body(list);
+        } catch (MyResourceNotFoundException e) {
+            throw  new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "findAllByUserId API not found", e);
+        }
+    }
+
+    @PostMapping("/users/{userId}/tasks")
+    public ResponseEntity<?> save(@RequestBody Task task, @PathVariable String userId) {
+        try {
+            //Task result = taskService.save(new Task(task.getTaskId(), task.getTitle(), task.getIsDone(), task.getDate(), userId));
+            task.setUserId(userId);
+            Task result = taskService.save(task);
             URI location = ServletUriComponentsBuilder
                     .fromCurrentRequest().path("/{id}")
                     .buildAndExpand(result.getTaskId()).toUri();
@@ -54,7 +69,7 @@ public class TaskController {
                     HttpStatus.NOT_FOUND, "create API not found", e);
         }
     }
-*/
+
     @PutMapping("/tasks/{id}")
     public ResponseEntity<Void> update(@PathVariable("id") String taskId, @RequestBody Task task) {
         try {
