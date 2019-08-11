@@ -77,4 +77,11 @@ public class TaskDao implements ITaskDao {
         findAllByUserId.addCriteria(Criteria.where("userId").is(userId));
         return mongoTemplate.find(findAllByUserId, Task.class);
     }
+
+    @Override
+    public void deleteAllByUserId(String userId) {
+        Query deleteAllByUserId = new Query();
+        deleteAllByUserId.addCriteria(Criteria.where("userId").is(userId));
+        mongoTemplate.findAllAndRemove(deleteAllByUserId, Task.class);
+    }
 }

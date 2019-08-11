@@ -20,4 +20,5 @@ public interface ITaskService {
 
     List<Task> findAllByUserId(String userId);
 
+    void deleteAllByUserId(String userId);
 }

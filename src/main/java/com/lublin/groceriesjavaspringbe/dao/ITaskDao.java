@@ -20,4 +20,6 @@ public interface ITaskDao {
 
     List findAllByUserId(String userId);
 
+    void deleteAllByUserId(String userId);
+
 }

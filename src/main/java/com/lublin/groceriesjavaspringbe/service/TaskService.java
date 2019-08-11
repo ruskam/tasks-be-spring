@@ -27,6 +27,7 @@ public class TaskService implements ITaskService{
         return taskDao.findAll();
     }
 
+    // Save a task with user id
     @Override
     public Task save(Task task) {
         ObjectId genId = ObjectId.get();
@@ -54,6 +55,11 @@ public class TaskService implements ITaskService{
     @Override
     public List<Task> findAllByUserId(String userId) {
         return taskDao.findAllByUserId(userId);
+    }
+
+    @Override
+    public void deleteAllByUserId(String userId) {
+        taskDao.deleteAllByUserId(userId);
     }
 
 

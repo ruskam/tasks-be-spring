@@ -102,4 +102,14 @@ public class TaskController {
                     HttpStatus.METHOD_NOT_ALLOWED, "delete all not allowed", e);
         }
     }
+
+    @DeleteMapping("/users/{userId}/tasks")
+    public ResponseEntity<?> deleteAllByUserId(@PathVariable String userId) {
+        try {
+            taskService.deleteAllByUserId(userId);
+            return ResponseEntity.noContent().build();
+        } catch (MyResourceNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "delete all tasks given userId not allowed");
+        }
+    }
 }
