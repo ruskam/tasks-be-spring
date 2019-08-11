@@ -57,7 +57,6 @@ public class TaskController {
     @PostMapping("/users/{userId}/tasks")
     public ResponseEntity<?> save(@RequestBody Task task, @PathVariable String userId) {
         try {
-            //Task result = taskService.save(new Task(task.getTaskId(), task.getTitle(), task.getIsDone(), task.getDate(), userId));
             task.setUserId(userId);
             Task result = taskService.save(task);
             URI location = ServletUriComponentsBuilder
