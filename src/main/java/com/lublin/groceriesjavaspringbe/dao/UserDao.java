@@ -26,11 +26,6 @@ public class UserDao implements IUserDao {
     public User findById(String id) {
         Query findByIdQuery = new Query();
         findByIdQuery.addCriteria(Criteria.where("userId").is(id));
-        if (mongoTemplate.findOne(findByIdQuery, User.class) != null) {
-            System.out.println("found");
-        } else {
-            System.out.println("not found");
-        }
         return mongoTemplate.findOne(findByIdQuery, User.class);
     }
 

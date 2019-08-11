@@ -40,11 +40,6 @@ public class TaskDao implements ITaskDao {
     }
 
     @Override
-    public List<Task> findAllByUserId(String userId) {
-        return null;
-    }
-
-    @Override
     public Task save(Task task) {
         return mongoTemplate.save(task);
     }
@@ -74,5 +69,12 @@ public class TaskDao implements ITaskDao {
         Query deleteAllQuery = new Query();
         deleteAllQuery.addCriteria(Criteria.where("taskId").exists(true));
         mongoTemplate.findAllAndRemove(deleteAllQuery, Task.class);
+    }
+
+    @Override
+    public List<Task> findAllByUserId(String userId) {
+        Query findAllByUserId = new Query();
+        findAllByUserId.addCriteria(Criteria.where("userId").is(userId));
+        return mongoTemplate.find(findAllByUserId, Task.class);
     }
 }
