@@ -63,7 +63,8 @@ public class TaskController {
             URI location = ServletUriComponentsBuilder
                     .fromCurrentRequest().path("/{id}")
                     .buildAndExpand(result.getTaskId()).toUri();
-            return ResponseEntity.created(location).build();
+            //return ResponseEntity.ok(result);
+            return ResponseEntity.ok().body(result);
         } catch (MyResourceNotFoundException e) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "create API not found", e);
